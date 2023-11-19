@@ -11,18 +11,18 @@ const MateriaisToDO = () => {
   const [descricao, setDescricao] = useState();
   const [orçado, setQuantidade] = useState();
 
-  const handleInputChange = ({target}) => {
+  const handleInputChange = ({ target }) => {
     const { name, value } = target;
 
     switch (name) {
       case "codigo":
-        setCodigo(value);
+        setCodigo(parseFloat(value));
         break;
       case "descricao":
         setDescricao(value);
         break;
       case "orçado":
-        setQuantidade(value);
+        setQuantidade(parseFloat(value));
         break;
       default:
         break;
@@ -81,17 +81,7 @@ const MateriaisToDO = () => {
       <Title level={5}>Materiais</Title>
 
       <Form
-        labelCol={{
-          span: 8,
-        }}
-        wrapperCol={{
-          span: 16,
-        }}
-        initialValues={{
-          remember: true,
-        }}
-        autoComplete="off"
-        style={{ display: "flex", flexDirection: "row", gap: "10px" }}
+        style={{ display: "flex", flexDirection: "row", gap: "5px" }}
         size="small"
       >
         <Form.Item

@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 
 import {
@@ -7,7 +6,6 @@ import {
   Button,
   Spin,
   FloatButton,
-  Modal,
   Popconfirm,
   notification,
 } from "antd";
@@ -17,12 +15,10 @@ import { useNavigate } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_PROJETOS, DELETE_PROJETOS } from "../../Schemas";
 import { DeleteOutlined, EyeOutlined, PlusOutlined } from "@ant-design/icons";
-import NovoProjeto from "../../components/Formularios/NovoProjeto";
 
 function Projetos() {
   const { data, loading } = useQuery(GET_PROJETOS);
   const [deleteProjeto] = useMutation(DELETE_PROJETOS);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [api, contextHolder] = notification.useNotification();
   const openNotificationWithIcon = (type) => {
@@ -32,25 +28,14 @@ function Projetos() {
     });
   };
 
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
   const navigate = useNavigate();
 
   const handleClick = (e) => {
     navigate(`/projeto/${e}`);
   };
 
-  const onFinish = () => {
-    setIsModalOpen(false);
+  const createProject = () => {
+    navigate(`/projetos/createProject`);
   };
 
   const confirm = (id) => {
@@ -90,18 +75,6 @@ function Projetos() {
       }}
     >
       {contextHolder}
-      <Modal
-        title="Novo Projeto"
-        open={isModalOpen}
-        onOk={handleOk}
-        onCancel={handleCancel}
-        width={"80%"}
-        footer={null}
-        centered={true}
-        keyboard={true}
-      >
-        <NovoProjeto onFinishProp={onFinish} />
-      </Modal>
 
       <Space
         wrap={true}
@@ -151,7 +124,7 @@ function Projetos() {
           right: 94,
         }}
         icon={<PlusOutlined />}
-        onClick={showModal}
+        onClick={createProject}
       />
     </Space>
   );

@@ -40,7 +40,7 @@ export const filter = (array, unidade) => {
         agrupado[codigo].planejado += planejado;
         // agrupado[codigo].valor += valor; // Sum the "valor" field as well
       } else {
-        agrupado[codigo] = { ...item, planejado, valor };
+        agrupado[codigo] = { ...item, planejado };
       }
 
       return agrupado;

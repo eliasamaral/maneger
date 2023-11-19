@@ -1,7 +1,7 @@
 import { DeleteTwoTone } from "@ant-design/icons";
 import { Button, Space, Table, message, Popconfirm } from "antd";
 
-import usePontoContext from "../../utility/hooks";
+  import {usePontoContext} from "../../utility/hooks";
 
 function Materiais() {
   const { pontoInicial } = usePontoContext();
@@ -56,7 +56,7 @@ function Materiais() {
       <Table
         columns={columns}
         rowKey={(record) => record.id}
-        dataSource={pontoInicial.material}
+        dataSource={null}
         pagination={{ pageSize: 100 }}
         scroll={{ y: "80vh" }}
         style={{ width: "1050px", marginInlineStart: "16px" }}
