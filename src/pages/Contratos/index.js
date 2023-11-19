@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { Card, Space, Button, FloatButton, Modal } from "antd";
 
 import { EyeOutlined, PlusOutlined } from "@ant-design/icons";
-import NovoProjeto from "../../components/Formularios/NovoProjeto";
 
 export default function Contratos() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -40,7 +39,6 @@ export default function Contratos() {
         footer={null}
         width={900}
       >
-        <NovoProjeto onFinishProp={onFinish} />
       </Modal>
 
       <Space

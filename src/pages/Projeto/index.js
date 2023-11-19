@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Button, Spin, Typography, Result, Modal } from "antd";
 
-import usePontoContext from "../../utility/hooks";
+import {usePontoContext} from "../../utility/hooks";
 
 import { useQuery } from "@apollo/client";
 import { GET_PROJETO } from "../../Schemas";

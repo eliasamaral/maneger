@@ -17,16 +17,16 @@ const ServicosToDO = () => {
 
     switch (name) {
       case "codigo":
-        setCodigo(value);
+        setCodigo(parseFloat(value));
         break;
       case "descricao":
         setDescricao(value);
         break;
       case "orçado":
-        setOrçado(value);
+        setOrçado(parseFloat(value));
         break;
       case "executado":
-        setExecutado(value);
+        setExecutado(parseFloat(value));
         break;
       default:
         break;

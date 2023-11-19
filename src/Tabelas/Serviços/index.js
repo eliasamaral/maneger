@@ -1,6 +1,6 @@
 import { Table } from "antd";
 
-import usePontoContext from "../../utility/hooks";
+import { usePontoContext } from "../../utility/hooks";
 
 function Serviços() {
   const { pontoInicial } = usePontoContext();
@@ -33,7 +33,7 @@ function Serviços() {
     <Table
       columns={columns}
       rowKey={(record) => record.id}
-      dataSource={pontoInicial.srv}
+      dataSource={null}
       scroll={{ y: "80vh" }}
       style={{ width: "1050px", marginInlineStart: "16px" }}
     />

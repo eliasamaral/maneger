@@ -2,14 +2,15 @@ import { gql } from "@apollo/client";
 
 export const CREATE_PROJETO = gql`
   mutation (
-    $projeto: Float!
+    $projeto: Float
     $cidade: String
     $contrato: Float
     $local: String
     $csd: String
-    $diagrama: Float!
+    $diagrama: Float
     $fiscal: String
     $tipo: String
+    $coord: String
     $RDODigital: [RDODigitalInput]
   ) {
     createProjeto(
@@ -22,6 +23,7 @@ export const CREATE_PROJETO = gql`
         diagrama: $diagrama
         fiscal: $fiscal
         tipo: $tipo
+        coord: $coord
         RDODigital: $RDODigital
       }
     ) {
@@ -102,6 +104,7 @@ export const GET_PROJETO = gql`
       id
       projeto
       tipo
+      coord
       pontos {
         id
         status

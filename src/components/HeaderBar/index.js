@@ -25,10 +25,12 @@ export default function HeaderBar() {
   const routeTitles = {
     "/": "Dashboard",
     "/projetos": "Carteira de obras",
+    "/projetos/createProject": "Criar novo projeto",
     "/rdo": "Relatórios de Obra",
     "/ads": "ADS Digital",
     "/codigos": "Códigos",
     "/contratos": "Contratos",
+
   };
 
   const currentRoute = location.pathname;

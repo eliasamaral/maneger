@@ -1,8 +1,8 @@
 import React from "react";
-import usePontoContext from "../../utility/hooks";
+import {usePontoContext} from "../../utility/hooks";
 
 function Ponto(props) {
-  const { pontoInicial, setPontoInicial } = usePontoContext();
+  const { setPontoInicial } = usePontoContext();
 
   const { ponto } = props;
 
