@@ -1,11 +1,6 @@
 import { Table } from "antd";
 
-import { usePontoContext } from "../../utility/hooks";
-
 function Serviços() {
-  const { pontoInicial } = usePontoContext();
-  console.log(pontoInicial);
-
   const columns = [
     {
       title: "Codigo",

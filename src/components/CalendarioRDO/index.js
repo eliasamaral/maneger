@@ -20,9 +20,7 @@ function CalendarioRDO() {
       );
       if (objetoFiltrado) {
         setRDOfiltrado(objetoFiltrado);
-      } else {
-        console.log("Objeto não encontrado.");
-      }
+      } 
     }
   }, [data, RDOselected]);
 

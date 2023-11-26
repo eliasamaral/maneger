@@ -1,10 +1,8 @@
 import { DeleteTwoTone } from "@ant-design/icons";
 import { Button, Space, Table, message, Popconfirm } from "antd";
 
-  import {usePontoContext} from "../../utility/hooks";
 
 function Materiais() {
-  const { pontoInicial } = usePontoContext();
 
   const [messageApi, contextHolder] = message.useMessage();
   const warning = () => {

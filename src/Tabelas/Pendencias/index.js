@@ -1,10 +1,6 @@
 import { Table } from "antd";
 
-    import {usePontoContext} from "../../utility/hooks";
-
 function Pendencias() {
-  const { pontoInicial } = usePontoContext();
-
   const columns = [
     {
       title: "Descrição",
@@ -18,7 +14,7 @@ function Pendencias() {
       <Table
         columns={columns}
         rowKey={(record) => record.id}
-        dataSource={ null}
+        dataSource={null}
         pagination={{ pageSize: 100 }}
         scroll={{ y: "80vh" }}
         style={{ width: "1050px", marginInlineStart: "16px" }}
