@@ -1,5 +1,5 @@
 import React from "react";
-import { Descriptions, Space, Spin, Table } from "antd";
+import { Descriptions, Space, Spin, Table, Tag } from "antd";
 import { useQuery } from "@apollo/client";
 import { GET_RDO } from "../../Schemas";
 
@@ -22,6 +22,8 @@ const columns = [
     width: "100px",
   },
 ];
+
+const colorStatus = ["#108ee9", "#ec1c24"];
 
 export default function RDODigital({ RDOfiltrado }) {
   const { _id } = RDOfiltrado;
@@ -48,7 +50,7 @@ export default function RDODigital({ RDOfiltrado }) {
   }
 
   const { getRDO } = data;
-  console.log(getRDO);
+  
 
   return (
     <Space
@@ -62,6 +64,12 @@ export default function RDODigital({ RDOfiltrado }) {
         backgroundColor: "#f5f5f5cc",
       }}
     >
+      <Tag
+        color={getRDO.isFinal ? colorStatus[1] : colorStatus[0]}
+        style={{ marginBottom: "5px" }}
+      >
+        {getRDO.isFinal ? "Final" : "Parcial"}
+      </Tag>
       <Descriptions title="RDO Digital">
         <Descriptions.Item label="Projeto">{getRDO.projeto}</Descriptions.Item>
         <Descriptions.Item label="Diagrama">
@@ -77,21 +85,25 @@ export default function RDODigital({ RDOfiltrado }) {
       </Descriptions>
       <Descriptions>
         <Descriptions.Item label="Encarregado">
-          {getRDO.encarregadoQuantidade}
+          {getRDO.maoDeObra.encarregado}
         </Descriptions.Item>
         <Descriptions.Item label="Motorista">
-          {getRDO.motoristaQuantidade}
+          {getRDO.maoDeObra.motorista}
         </Descriptions.Item>
-        <Descriptions.Item label="Eletrecista">
-          {getRDO.eletricistaQuantidade}
+        <Descriptions.Item label="Eletricista">
+          {getRDO.maoDeObra.eletricista}
         </Descriptions.Item>
         <Descriptions.Item label="Auxiliar">
-          {getRDO.auxiliarQuantidade}
+          {getRDO.maoDeObra.auxiliar}
         </Descriptions.Item>
       </Descriptions>
       <Descriptions>
-        <Descriptions.Item label="Manhã">{getRDO.climaManha}</Descriptions.Item>
-        <Descriptions.Item label="Tarde">{getRDO.climaTarde}</Descriptions.Item>
+        <Descriptions.Item label="Manhã">
+          {getRDO.clima.manha}
+        </Descriptions.Item>
+        <Descriptions.Item label="Tarde">
+          {getRDO.clima.tarde}
+        </Descriptions.Item>
       </Descriptions>
       <Descriptions>
         <Descriptions.Item>{getRDO.observacoes}</Descriptions.Item>

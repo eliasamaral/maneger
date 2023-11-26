@@ -7,8 +7,8 @@ import { processarArquivo, filter } from "../../utility/process_ads_data";
 
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CREATE_PROJETO, GET_PROJETOS } from "../../Schemas";
-import { useMutation } from "@apollo/client";
+import { CREATE_PROJETO, GET_PROJETOS, GET_CONTRATOS } from "../../Schemas";
+import { useMutation, useQuery } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
 
 const inputStyle = {
@@ -55,9 +55,9 @@ const columns = [
 ];
 
 const Schema = z.object({
-  projeto: z.coerce.number("Item obrigatório."),
-  diagrama: z.coerce.number("Item obrigatório."),
-  contrato: z.coerce.number("Item obrigatório."),
+  projeto: z.coerce.number(),
+  diagrama: z.coerce.number(),
+  contrato: z.coerce.number(),
   cidade: z
     .string()
     .nonempty("Item obrigatório.")
@@ -82,30 +82,7 @@ const Schema = z.object({
         })
         .join(" ");
     }),
-  csd: z
-    .string()
-    .nonempty("Item obrigatório.")
-    .transform((name) => {
-      return name
-        .trim()
-        .split(" ")
-        .map((word) => {
-          return word[0].toLocaleUpperCase().concat(word.substring(1));
-        })
-        .join(" ");
-    }),
-  fiscal: z
-    .string()
-    .nonempty("Item obrigatório.")
-    .transform((name) => {
-      return name
-        .trim()
-        .split(" ")
-        .map((word) => {
-          return word[0].toLocaleUpperCase().concat(word.substring(1));
-        })
-        .join(" ");
-    }),
+
   tipo: z
     .string()
     .nonempty("Item obrigatório.")
@@ -119,12 +96,20 @@ const Schema = z.object({
         .join(" ");
     }),
 
-  coord: z.string().nonempty("Item obrigatório."),
+    coord : z.object({
+      x: z.string(),
+      y: z.string(),
+    }),
+
+  // x: z.string().nonempty("Item obrigatório."),
+  // y: z.string().nonempty("Item obrigatório."),
 });
 
 function CreateProject() {
   const navigate = useNavigate();
   const [createProjeto, { loading, error }] = useMutation(CREATE_PROJETO);
+  const { data: dataContratos, loading: loadingContratos } =
+    useQuery(GET_CONTRATOS);
 
   const {
     handleSubmit,
@@ -151,8 +136,6 @@ function CreateProject() {
     }
   };
 
-  //************************************** */
-
   const [unidade, setUnidade] = useState();
   const [dadosFiltrados, setDadosFiltrados] = useState([]);
   const [arquivo, setArquivo] = useState(null);
@@ -177,8 +160,10 @@ function CreateProject() {
       });
   };
 
-  if (loading) return "Submitting...";
+  if (loading || loadingContratos) return "Submitting...";
   if (error) return `Submission error! ${error.message}`;
+
+  const { contratos } = dataContratos;
 
   return (
     <Space
@@ -211,17 +196,17 @@ function CreateProject() {
           </span>
 
           <span style={spanStyle}>
-            <input
-              {...register("contrato")}
-              type="number"
-              placeholder="Contrato"
-              style={inputStyle}
-            />
+            <select {...register("contrato")} style={inputStyle}>
+              {contratos.map((contrato, index) => (
+                <option key={index} value={contrato.numero}>
+                  {contrato.numero}
+                </option>
+              ))}
+            </select>
             {errors.contrato && <span>{errors.contrato.message}</span>}
           </span>
 
           <span style={spanStyle}>
-            {" "}
             <input
               {...register("cidade")}
               type="text"
@@ -232,7 +217,6 @@ function CreateProject() {
           </span>
 
           <span style={spanStyle}>
-            {" "}
             <input
               {...register("local")}
               type="text"
@@ -240,27 +224,6 @@ function CreateProject() {
               style={inputStyle}
             />
             {errors.local && <span>{errors.local.message}</span>}
-          </span>
-
-          <span style={spanStyle}>
-            <input
-              {...register("csd")}
-              type="text"
-              placeholder="CSD"
-              style={inputStyle}
-            />
-            {errors.CSD && <span>{errors.csd.message}</span>}
-          </span>
-
-          <span style={spanStyle}>
-            <input
-              {...register("fiscal")}
-              status={errors.fiscal ? "error" : "success"}
-              type="text"
-              placeholder="Fiscal"
-              style={inputStyle}
-            />
-            {errors.fiscal && <span>{errors.fiscal.message}</span>}
           </span>
 
           <span style={spanStyle}>
@@ -276,13 +239,24 @@ function CreateProject() {
 
           <span style={spanStyle}>
             <input
-              {...register("coord")}
-              status={errors.coord ? "error" : "success"}
+              {...register("coord.x")}
+              status={errors.x ? "error" : "success"}
               type="text"
-              placeholder="Coordenadas"
+              placeholder="Coordenada X"
               style={inputStyle}
             />
-            {errors.coord && <span>{errors.coord.message}</span>}
+            {errors.x && <span>{errors.x.message}</span>}
+          </span>
+
+          <span style={spanStyle}>
+            <input
+              {...register("coord.y")}
+              status={errors.y ? "error" : "success"}
+              type="text"
+              placeholder="Coordenada Y"
+              style={inputStyle}
+            />
+            {errors.y && <span>{errors.y.message}</span>}
           </span>
         </Space>
 
