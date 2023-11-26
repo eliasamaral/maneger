@@ -10,7 +10,7 @@ export const CREATE_PROJETO = gql`
     $diagrama: Float
     $fiscal: String
     $tipo: String
-    $coord: String
+    $coord: CoordInput
     $RDODigital: [RDODigitalInput]
   ) {
     createProjeto(
@@ -69,17 +69,22 @@ export const GET_RDO = gql`
   query ($_id: ID!) {
     getRDO(_id: $_id) {
       _id
-      climaManha
-      climaTarde
-      diagrama
-      local
+      clima {
+        manha
+        tarde
+      }
       createdAt
       dataDaProducao
-      encarregadoQuantidade
-      eletricistaQuantidade
-      motoristaQuantidade
-      auxiliarQuantidade
+      diagrama
       encarregado
+      isFinal
+      local
+      maoDeObra {
+        auxiliar
+        eletricista
+        encarregado
+        motorista
+      }
       observacoes
       projeto
       servicos {
@@ -104,7 +109,10 @@ export const GET_PROJETO = gql`
       id
       projeto
       tipo
-      coord
+      coord {
+        x
+        y
+      }
       pontos {
         id
         status
@@ -145,6 +153,16 @@ export const LOGIN_USER = gql`
       email
       administrador
       token
+    }
+  }
+`;
+
+export const GET_CONTRATOS = gql`
+  query {
+    contratos {
+      id
+      numero
+      fator
     }
   }
 `;

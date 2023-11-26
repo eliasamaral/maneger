@@ -41,7 +41,7 @@ function Atributos(props) {
         {atributoItem("Fiscal", data.fiscal)}
         {atributoItem("Tipo", data.tipo)}
         {atributoItem("Contrato", data.contrato)}
-        {atributoItem("Coordenadas", data.coord)}
+        {atributoItem("Coordenadas", data.coord.x + " " + data.coord.y)}
       </Space>
     </>
   );
