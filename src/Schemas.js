@@ -35,12 +35,13 @@ export const CREATE_PROJETO = gql`
 export const GET_CODIGOS = gql`
   query {
     codigos {
-      code
-      description
-      fator
-      id
-      peso
+      codigo
+      descricao
+      umb
+      preco
       tipo
+      fator
+      ativo
     }
   }
 `;

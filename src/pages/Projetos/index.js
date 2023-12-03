@@ -95,7 +95,7 @@ function Projetos() {
                 </Button>
                 <Popconfirm
                   title="Deletar projeto"
-                  description="Você deseja realmente deletar esse projeto?"
+                  description="Ao deletar este projeto, os dados na aplicação RDO Digital serão removidos, impedindo a criação de relatórios pela equipe de campo. Confirmar exclusão?"
                   onConfirm={() => {
                     confirm(obra.id);
                   }}

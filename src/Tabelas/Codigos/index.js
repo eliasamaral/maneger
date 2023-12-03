@@ -161,18 +161,18 @@ function Codigos() {
   const columns = [
     {
       title: "Codigo",
-      dataIndex: "code",
-      key: "code",
+      dataIndex: "codigo",
+      key: "codigo",
       sorter: {
-        compare: (a, b) => a.code - b.code,
+        compare: (a, b) => a.codigo - b.codigo,
         multiple: 2,
       },
     },
     {
       title: "Descrição",
-      dataIndex: "description",
-      key: "description",
-      ...getColumnSearchProps("description"),
+      dataIndex: "descricao",
+      key: "descricao",
+      ...getColumnSearchProps("descricao"),
     },
     {
       title: "Tipo",
@@ -181,21 +181,21 @@ function Codigos() {
       filters: [
         {
           text: "Novo",
-          value: "novo",
+          value: "NOVO",
         },
-        {
+        { 
           text: "Serviço",
-          value: "serviço",
+          value: "SRV",
         },
         {
           text: "Sucata",
-          value: "sucata",
+          value: "SUCATA",
         },
       ],
       onFilter: (value, record) => record.tipo.indexOf(value) === 0,
       render: (_, { tipo }) => {
-        let color = tipo === "sucata" ? "cyan" : "blue";
-        if (tipo === "novo") {
+        let color = tipo === "SUCATA" ? "cyan" : "blue";
+        if (tipo === "NOVO") {
           color = "green";
         }
         return (
@@ -205,25 +205,25 @@ function Codigos() {
         );
       },
     },
-    {
-      title: "Ações",
-      key: "action",
-      render: (_, record) => (
-        <Space size="middle">
-          <Button type="link" onClick={showDrawer}>
-            <EditTwoTone style={{ fontSize: "22px" }} />
-          </Button>
-          <Popconfirm title="Esta certo disso?">
-            <Button type="link" onConfirm={warning}>
-              <DeleteTwoTone
-                twoToneColor="#d90000"
-                style={{ fontSize: "22px" }}
-              />
-            </Button>
-          </Popconfirm>
-        </Space>
-      ),
-    },
+    // {
+    //   title: "Ações",
+    //   key: "action",
+    //   render: (_, record) => (
+    //     <Space size="middle">
+    //       <Button type="link" onClick={showDrawer}>
+    //         <EditTwoTone style={{ fontSize: "22px" }} />
+    //       </Button>
+    //       <Popconfirm title="Esta certo disso?">
+    //         <Button type="link" onConfirm={warning}>
+    //           <DeleteTwoTone
+    //             twoToneColor="#d90000"
+    //             style={{ fontSize: "22px" }}
+    //           />
+    //         </Button>
+    //       </Popconfirm>
+    //     </Space>
+    //   ),
+    // },
   ];
 
   return (

@@ -41,10 +41,7 @@ export default function SideBar() {
             label: "Ferramentas",
             icon: <ToolOutlined />,
             children: [
-              {
-                label: "ADS Digital",
-                key: "/ads",
-              },
+         
               {
                 label: "Códigos",
                 key: "/codigos",
